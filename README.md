@@ -19,23 +19,32 @@ In addition to this getting started tutorial, you can find a sample application 
 
 ## Installation
 Add the following to your service collection. 
-`services.Configure<AzureConfig>(Configuration.GetSection("Azure"));
-services.AddTranslation<BlogPost>();`
+```
+ services.Configure<AzureConfig>(Configuration.GetSection("Azure"));
+ services.AddTranslation<BlogPost>();
+```
 Where the BlogPost refers to your model class that you want to translate. 
 
 In you configuration file add the following section 
-`"Azure": {
+```
+"Azure": {
     "TranslationSubscriptionKey": "XXXXXXXXXX"
-  }`
+  }
+```
 XXXXXXXXXX refers Azure Subscription Key 
 
 In your model class please make sure that you have the `[Serializable]` attribute above your class.
 
-For the class that will be utilizing the translation Service add the following to the constructor
-`TranslationService<BlogPost> translationService` 
+For the class that will be utilizing the translation Service add the following to the constructor:
+
+```
+TranslationService<BlogPost> translationService
+``` 
 
 and execute the translation as follows
-`var translatedObject = await translationService.TranslateAsync(yourObject, "nl") `
+```
+var translatedObject = await translationService.TranslateAsync(yourObject, "nl")
+```
 Where the "nl" refers to the destination language that will be sent to the Azure Cognitive Services 
 
 ### Additional Resources
