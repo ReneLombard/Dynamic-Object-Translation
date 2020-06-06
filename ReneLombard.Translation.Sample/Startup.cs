@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ReneLombard.Translation.DataStore;
+using ReneLombard.Translation.Extensions;
 using ReneLombard.Translation.Options;
 using ReneLombard.Translation.Sample.Models;
-using System.Net.Http;
 
 namespace ReneLombard.Translation.Sample
 {
@@ -26,12 +25,8 @@ namespace ReneLombard.Translation.Sample
 
             services.AddSingleton<IConfigurationRoot>(Configuration);
             services.AddSingleton<ConsoleService>();
-            services.AddTransient<AzureTranslationClient>();
-            services.AddTransient<ReneLombard.Translation.TranslationService<BlogPost>>();
             services.Configure<AzureConfig>(Configuration.GetSection("Azure"));
-            services.AddSingleton<InMemoryCollection>();
-            services.AddSingleton<HttpClient>();
-            //services.AddSingleton<IMyService, MyService>();
+            services.AddTranslation<BlogPost>();
         }
     }
 }
